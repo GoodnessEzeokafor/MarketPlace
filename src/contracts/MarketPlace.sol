@@ -26,27 +26,28 @@
         - traceProduct
         - store transactionHash
 */
-pragma solidity ^0.5.0;
 
+
+pragma solidity ^0.5.0;
 contract MarketPlace{
-    string public dapp_name;
+
+
+    string public dapp_name;  //dapp_name 
     string public dapp_builder = "@GoodnessEzeokafor";
-    
-    uint public farmerCount =0;
+    uint public farmerCount =0; 
     uint public buyerCount =0;
     uint public transportCompanyCount =0;
     uint public traceCount =0;
     uint public productCount = 0;
+
     mapping (uint=>Farmer) public farmers;
     mapping (uint=>Buyer) public buyers;
     mapping (uint=>TransportCompany) public transport_companies;
     mapping (uint=>Product) public products;
     mapping (uint=>Trace) public tracing;
-    
 
 
     /* START STRUCT  */
-
     struct Farmer{
         uint id;
         string full_name;
@@ -56,6 +57,8 @@ contract MarketPlace{
         string farm_description;
         address farmer_wallet_address;
     }
+
+
 
 
     struct Buyer{
@@ -157,6 +160,7 @@ contract MarketPlace{
     event Arrived(uint id, bool arrived, uint updated);
     
     /* END EVENT */
+
     /* START METHOD */
     function createSellerProfile(
         string memory _full_name,
@@ -190,7 +194,6 @@ contract MarketPlace{
 
 
     function createBuyer(
-
         string memory _full_name,
         string memory _picture,
         string memory  _email_address
@@ -324,7 +327,7 @@ contract MarketPlace{
     }
 
 
-    function getTransportCompanyDetaul(uint _id)public view returns(
+    function getTransportCompanyDetail(uint _id)public view returns(
         uint id,
         string memory,
         string memory,
