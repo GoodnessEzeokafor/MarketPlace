@@ -97,6 +97,25 @@ contract("MarketPlace smart contract unit testing",([deployer, seller, buyer, tr
         assert.equal(result['transport_address'].toString(),"transport address")
         assert.equal(result['transport_wallet_address'].toString(),transport)
     })
+
+    it("MarketPlace Contract:- create a createProduct", async() => {
+        const newProduct = await this.contract.createProduct(
+            "product name",
+            "product description",
+            web3.utils.toWei('0.3','Ether'),
+            "picture.jpg",
+            {'from':seller}
+        )
+        const productCount = await this.contract.productCount()
+        const result = newProduct.logs[0].args
+        assert.equal(result['id'].toString(),productCount)
+        assert.equal(result['product_name'].toString(),"product name")        
+        assert.equal(result['product_description'].toString(),"product description")
+        assert.equal(result['product_price'].toString(),web3.utils.toWei('0.3','Ether'))
+        assert.equal(result['upload_image'].toString(),"picture.jpg")
+        assert.equal(result['seller'].toString(),seller)
+    })
+    
     it("MarketPlace Contract:- create a getFarmerDetail", async() => {
         const single_farmer = await this.contract.getFarmerDetail(1)
         assert.equal(single_farmer['0'].toString(),1)
@@ -110,7 +129,7 @@ contract("MarketPlace smart contract unit testing",([deployer, seller, buyer, tr
     //
     
     it("MarketPlace Contract:- create a getBuyerDetail", async() => {
-        const single_buyer = await this.contract.getFarmerDetail(1)
+        const single_buyer = await this.contract.getBuyerDetail(1)
         assert.equal(single_buyer['0'].toString(),1)
         assert.equal(single_buyer['1'].toString(),"Full Name")
         assert.equal(single_buyer['2'].toString(),"pic.jpg")
