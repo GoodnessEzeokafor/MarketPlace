@@ -4,7 +4,10 @@ import SellerForm from "./Components/Seller/SellerForm"
 import BuyerForm from "./Components/Buyer/BuyerForm"
 // import Products from "./Components/Seller/Products"
 import Products from "./Components/Products/Products"
+import Sellers from "./Components/Seller/Sellers"
 import  ProductForm from "./Components/Products/ProductForm"
+import TransportForm from "./Components/TransportCompany/TransportForm"
+import Transports from "./Components/TransportCompany/Transports"
 import Web3 from 'web3';
 import MarketPlace from "./abis/MarketPlace.json"
 
@@ -65,10 +68,11 @@ export default class App extends Component {
       const productCount = await MarketPlaceDapp.methods.productCount().call() 
       const farmerCount = await MarketPlaceDapp.methods.farmerCount().call()
       const buyerCount = await MarketPlaceDapp.methods.buyerCount().call()
-      
+      const transportCompanyCount = await MarketPlaceDapp.methods.transportCompanyCount().call()
       this.setState({productCount})
       this.setState({farmerCount})
       this.setState({buyerCount})
+      this.setState({transportCompanyCount})
 
       // const productDappName = await productDapp.methods.dapp_name().call()
       // this.setState({productDappName})
@@ -85,15 +89,30 @@ export default class App extends Component {
       // }
 
       // // Load Product
-      // for(var i=1; i <= productCount; i++){
-      //   const product = await productDapp.methods.products(i).call()
-      //   this.setState({
-      //     products:[...this.state.products, product]
-      //   })
-      // }
+      for(var i=1; i <= productCount; i++){
+        const product = await MarketPlaceDapp.methods.products(i).call()
+        this.setState({
+          products:[...this.state.products, product]
+        })
+      }
 
+      // LOAD FARMERS 
+      for(var j=1; j <= farmerCount; j++){
+        const farmer = await MarketPlaceDapp.methods.farmers(j).call()
+        this.setState({
+          farmers:[...this.state.farmers, farmer]
+        })
+      }
 
-    //   this.setState({loading:false})
+      // Load Drivers
+      for(var x=1; x <= transportCompanyCount; x++){
+        const transport_company = await MarketPlaceDapp.methods.transport_companies(x).call()
+        this.setState({
+          transport_companies:[...this.state.transport_companies, transport_company]
+        })
+      }
+
+      //   this.setState({loading:false})
 
     //   //logging out
     //   console.log(marketplace)
@@ -111,6 +130,8 @@ export default class App extends Component {
       account:'',
       message:'',
       products:[],
+      farmers:[], 
+      transport_companies:[],
       buyerCount:0,
       productCount:0,
       sellerCount:0,
@@ -131,8 +152,9 @@ export default class App extends Component {
             <div className="row">
               <div className="col-md-6 col-sm-6 col-6 col-lg-2">
                 <div className="logo">
-                  <a href="index.html">
-                    <img src="/images/logo/logo.png" alt="logo images" /> 
+                  <a href="/">
+                    {/* <img src="/images/logo/logo.png" alt="logo images" />  */}
+                    CROPBLOCK
                   </a>
                 </div>
               </div>
@@ -143,6 +165,10 @@ export default class App extends Component {
                     <li><Link to="/products">Products</Link></li> 
                     <li><Link to="/seller">Be a seller</Link></li>
                     <li><Link to="/buyer">Be a buyer</Link></li>
+                    {/* <li><Link to="/buyer">Be a buyer</Link></li>
+                     */}
+                    {/* <li><Link to="/transport">Be a driver</Link></li> */}
+                    <li><Link to="/sellers">Sellers</Link></li>
                     <li><Link to="/product">Add A Product</Link></li>
                   </ul>
                 </nav>
@@ -164,19 +190,40 @@ export default class App extends Component {
               account={this.state.account}
               />
             </Route>
+            <Route path="/sellers">
+              <Sellers 
+              MarketPlaceDapp={this.state.MarketPlaceDapp}
+              account={this.state.account}
+              farmers = {this.state.farmers}
+
+              />
+            </Route>
+            
             <Route path="/buyer">
               <BuyerForm 
                 MarketPlaceDapp={this.state.MarketPlaceDapp}
                 account={this.state.account}
               />
             </Route>
-           
             <Route path="/product">
               <ProductForm 
                 MarketPlaceDapp={this.state.MarketPlaceDapp}
                 account={this.state.account}
               />
             </Route>
+            <Route path="/transport">
+              <TransportForm 
+                MarketPlaceDapp={this.state.MarketPlaceDapp}
+                account={this.state.account}
+              />
+            </Route>
+             <Route path="/drivers">
+              <Transports
+                MarketPlaceDapp={this.state.MarketPlaceDapp}
+                account={this.state.account}
+                transport_companies={this.state.transport_companies}
+              />
+            </Route> 
             <Route path="/">
             </Route>
             </Switch>
@@ -192,7 +239,7 @@ export default class App extends Component {
                   <div className="footer__widget footer__menu">
                     <div className="ft__logo">
                       <a href="index.html">
-                        <img src="/images/logo/3.png" alt="logo" />
+                        CROPBLOCK
                       </a>
                       <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered duskam alteration variations of passages</p>
                     </div>
@@ -205,12 +252,10 @@ export default class App extends Component {
                         <li><a href="#"><i className="bi bi-youtube"></i></a></li>
                       </ul>
                       <ul className="mainmenu d-flex justify-content-center">
-                        <li><a href="index.html">Trending</a></li>
-                        <li><a href="index.html">Best Seller</a></li>
-                        <li><a href="index.html">All Product</a></li>
-                        <li><a href="index.html">Wishlist</a></li>
-                        <li><a href="index.html">Blog</a></li>
-                        <li><a href="index.html">Contact</a></li>
+                        <li><Link to="/transport">Be a driver </Link></li>
+                        <li><a href="/drivers">Transport Companies</a></li>
+                        <li><Link href="/products">All Product</Link></li>
+  
                       </ul>
                     </div>
                   </div>
@@ -239,87 +284,6 @@ export default class App extends Component {
         </footer>
         {/* <!-- //Footer Area -->
         <!-- QUICKVIEW PRODUCT --> */}
-        <div id="quickview-wrapper">
-            {/* <!-- Modal --> */}
-            <div className="modal fade" id="productmodal" tabindex="-1" role="dialog">
-                <div className="modal-dialog modal__container" role="document">
-                    <div className="modal-content">
-                        <div className="modal-header modal__header">
-                            <button type="button" className="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        </div>
-                        <div className="modal-body">
-                            <div className="modal-product">
-                                {/* <!-- Start product images --> */}
-                                <div className="product-images">
-                                    <div className="main-image images">
-                                        <img alt="big images" src="/images/product/big-img/1.jpg" />
-                                    </div>
-                                </div>
-                                {/* <!-- end product images --> */}
-                                <div className="product-info">
-                                    <h1>Simple Fabric Bags</h1>
-                                    <div className="rating__and__review">
-                                        <ul className="rating">
-                                            <li><span className="ti-star"></span></li>
-                                            <li><span className="ti-star"></span></li>
-                                            <li><span className="ti-star"></span></li>
-                                            <li><span className="ti-star"></span></li>
-                                            <li><span className="ti-star"></span></li>
-                                        </ul>
-                                        <div className="review">
-                                            <a href="#">4 customer reviews</a>
-                                        </div>
-                                    </div>
-                                    <div className="price-box-3">
-                                        <div className="s-price-box">
-                                            <span className="new-price">$17.20</span>
-                                            <span className="old-price">$45.00</span>
-                                        </div>
-                                    </div>
-                                    <div className="quick-desc">
-                                        Designed for simplicity and made from high quality materials. Its sleek geometry and material combinations creates a modern look.
-                                    </div>
-                                    <div className="select__color">
-                                        <h2>Select color</h2>
-                                        <ul className="color__list">
-                                            <li className="red"><a title="Red" href="#">Red</a></li>
-                                            <li className="gold"><a title="Gold" href="#">Gold</a></li>
-                                            <li className="orange"><a title="Orange" href="#">Orange</a></li>
-                                            <li className="orange"><a title="Orange" href="#">Orange</a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="select__size">
-                                        <h2>Select size</h2>
-                                        <ul className="color__list">
-                                            <li className="l__size"><a title="L" href="#">L</a></li>
-                                            <li className="m__size"><a title="M" href="#">M</a></li>
-                                            <li className="s__size"><a title="S" href="#">S</a></li>
-                                            <li className="xl__size"><a title="XL" href="#">XL</a></li>
-                                            <li className="xxl__size"><a title="XXL" href="#">XXL</a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="social-sharing">
-                                        <div className="widget widget_socialsharing_widget">
-                                            <h3 className="widget-title-modal">Share this product</h3>
-                                            <ul className="social__net social__net--2 d-flex justify-content-start">
-                                                <li className="facebook"><a href="#" className="rss social-icon"><i className="zmdi zmdi-rss"></i></a></li>
-                                                <li className="linkedin"><a href="#" className="linkedin social-icon"><i className="zmdi zmdi-linkedin"></i></a></li>
-                                                <li className="pinterest"><a href="#" className="pinterest social-icon"><i className="zmdi zmdi-pinterest"></i></a></li>
-                                                <li className="tumblr"><a href="#" className="tumblr social-icon"><i className="zmdi zmdi-tumblr"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="addtocart-btn">
-                                        <a href="#">Add to cart</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {/* <!-- END QUICKVIEW PRODUCT --> */}
       </div>
     </Router>
     );

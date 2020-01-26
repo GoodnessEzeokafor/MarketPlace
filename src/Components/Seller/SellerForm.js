@@ -1,6 +1,44 @@
 import React, { Component } from 'react';
 
 export default class SellerForm extends Component {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+}
+
+
+  handleSubmit(event){
+    try {
+
+    this.setState({loading:true})
+    this.props.MarketPlaceDapp.methods.createSellerProfile(
+        this.full_name.value,
+        this.picture.value,
+        this.farm_name.value,
+        this.email_address.value,
+        this.farm_description.value
+    )
+    .send({from:this.props.account})
+    .once('receipt',(receipt) => {
+        this.setState({loading:false})
+        console.log(receipt)
+    })
+    this.full_name.value = ""
+    this.picture.value =""
+    this.farm_name.value=""
+    this.email_address.value = ""
+    this.farm_description.value=""
+    
+    } catch (error){
+        console.log(error)
+    }
+    // this.setState({addModalShow:true})
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+
+
     render() {
         return (
             <div>
@@ -18,13 +56,14 @@ export default class SellerForm extends Component {
          <div className="row">
             <div className='col-md-2'></div>
             <div className="col-sm-12 col-md-7">
-                <form>
+                <form onSubmit={this.handleSubmit}>
             <div className="input-group" style={{marginBottom:"18px"}}>
                 <input 
                     type="text" 
                     className="form-control" 
                     placeholder="Full Name" 
                     aria-describedby="basic-addon1"
+                    ref={(input) => {this.full_name = input}}
                     />
                 </div>
 
@@ -34,6 +73,7 @@ export default class SellerForm extends Component {
                     className="form-control" 
                     placeholder="Picture Url" 
                     aria-describedby="basic-addon2"
+                    ref={(input) => {this.picture = input}}
                     />
                 </div>
                 <div class="input-group"  style={{marginBottom:"18px"}}>
@@ -42,6 +82,7 @@ export default class SellerForm extends Component {
                     className="form-control" 
                     placeholder="Farm Name" 
                     aria-describedby="basic-addon2"
+                    ref={(input) => {this.farm_name = input}}
                     />
                 </div>
                 <div class="input-group"  style={{marginBottom:"18px"}}>
@@ -50,11 +91,13 @@ export default class SellerForm extends Component {
                     className="form-control" 
                     placeholder="Email Addres" 
                     aria-describedby="basic-addon2"
+                    ref={(input) => {this.email_address = input}}
                     />
                 </div>
                 <div class="input-group"  style={{marginBottom:"18px"}}>
-                <textarea class="form-control" name="" id="" rows="3" placeholder="Farm Description"></textarea>
- 
+                <textarea 
+                ref = {(input) => {this.farm_description = input}}
+                class="form-control" name="" id="" rows="3" placeholder="Farm Description"></textarea>
                 </div>
                 <button type="submit" className="btn btn-primary btn-block">Create Account</button>
                 </form>
