@@ -10,6 +10,7 @@ import TransportForm from "./Components/TransportCompany/TransportForm"
 import Transports from "./Components/TransportCompany/Transports"
 import Web3 from 'web3';
 import MarketPlace from "./abis/MarketPlace.json"
+import NewLogo from "./NewLogo.png"
 
 
 export default class App extends Component {
@@ -153,8 +154,8 @@ export default class App extends Component {
               <div className="col-md-6 col-sm-6 col-6 col-lg-2">
                 <div className="logo">
                   <a href="/">
-                    {/* <img src="/images/logo/logo.png" alt="logo images" />  */}
-                    CROPBLOCK
+                    <img src="/images/NewLogo.png" alt="logo images" width="100" height="50"/> 
+                    {/* CROPBLOCK */}
                   </a>
                 </div>
               </div>
@@ -182,6 +183,9 @@ export default class App extends Component {
             <Route path="/products">
               <Products 
               products={this.state.products}
+              MarketPlaceDapp={this.state.MarketPlaceDapp}
+              account={this.state.account}
+
               />
             </Route>
             <Route path="/seller">
@@ -239,6 +243,7 @@ export default class App extends Component {
                   <div className="footer__widget footer__menu">
                     <div className="ft__logo">
                       <a href="index.html">
+                      {/* <img src="/images/NewLogo.png" alt="logo images"/>  */}
                         CROPBLOCK
                       </a>
                       <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered duskam alteration variations of passages</p>
@@ -253,9 +258,8 @@ export default class App extends Component {
                       </ul>
                       <ul className="mainmenu d-flex justify-content-center">
                         <li><Link to="/transport">Be a driver </Link></li>
-                        <li><a href="/drivers">Transport Companies</a></li>
-                        <li><Link href="/products">All Product</Link></li>
-  
+                        <li><Link to="/drivers">Transport Companies</Link></li>
+                        <li><Link to="/products">All Product</Link></li>
                       </ul>
                     </div>
                   </div>

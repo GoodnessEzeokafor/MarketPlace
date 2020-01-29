@@ -27,7 +27,33 @@ export default class Products extends Component {
                   <p>
                       {product.product_description}
                   </p>
-                  <p><a href="#" className="btn btn-primary" role="button">Buy Button</a> </p>
+            <p className="mb-2"><b>{product.product_price/1000000000000000000}ETH</b></p>
+            <p>
+                <input 
+                  type="text" 
+                  className="mb-2"   
+                  placeholder="QUANTITY TO BUY" 
+                  ref = {(input) => {this.quantity = input}}                  />
+                  <b>Quantity you want to buy</b>
+            </p> 
+            
+
+                  <p><button 
+                      className="btn btn-primary" 
+                      // role="button"
+                      id={product.id}
+                      value={product.product_price}
+                    onClick = {(event) => {
+                      const id = event.target.id;
+                      const quantity = parseInt(this.quantity.value,10)
+                      console.log("Quantity", quantity)
+                      this.props.MarketPlaceDapp.methods.buyProduct(id).send({from: this.props.account,value:event.target.value * quantity })
+                        .once('receipt', (receipt)=> {
+                          // this.setState({ loading: false})
+                        })
+                      event.persist();
+                    }}
+                  >Buy Button</button> </p>
                 </div>
               </div>
             </div>
