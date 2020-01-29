@@ -185,6 +185,7 @@ export default class App extends Component {
               products={this.state.products}
               MarketPlaceDapp={this.state.MarketPlaceDapp}
               account={this.state.account}
+              transport_companies={this.state.transport_companies}
 
               />
             </Route>

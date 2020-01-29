@@ -12,7 +12,6 @@ export default class Sellers extends Component {
               <div className="col-lg-12">
                 <div className="section__title text-center pb--50">
                   <h2 className="title__be--2">Best <span className="color--theme">Seller </span></h2>
-                  <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
                 </div>
               </div>
             </div>

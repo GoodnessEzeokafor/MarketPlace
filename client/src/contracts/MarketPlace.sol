@@ -306,6 +306,22 @@ contract MarketPlace{
         );
     }
 
+function getProductDetail(uint _id)public view returns(
+                                  uint id,
+                                  string memory,
+                                  string memory,
+                                  uint,
+                                  address
+    ){
+        Product memory p = products [_id];
+        return (
+            p.id,
+            p.product_name,
+            p.product_description,
+            p.product_price,
+            p.seller
+        );
+    }
 
     function getBuyerDetail(uint _id)public view returns(
                 uint,
