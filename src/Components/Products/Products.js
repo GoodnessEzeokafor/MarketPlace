@@ -53,7 +53,7 @@ export default class Products extends Component {
                         })
                       event.persist();
                     }}
-                  >Buy Button</button> </p>
+                  >Buy Product</button> </p>
                 </div>
               </div>
             </div>
