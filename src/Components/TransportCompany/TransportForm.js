@@ -47,7 +47,7 @@ export default class TransportForm extends Component {
     <div className="row">
     <div className="col-lg-12">
     <div className="section__title text-center pb--50">
-    <h2 className="title__be--2">Add A <span className="color--theme">Product </span></h2>
+    <h2 className="title__be--2">Be A <span className="color--theme">Driver </span></h2>
     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered lebmid alteration in some ledmid form</p>
     </div>
     </div>
