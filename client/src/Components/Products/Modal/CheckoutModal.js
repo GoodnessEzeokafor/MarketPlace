@@ -52,7 +52,8 @@ export default class CheckoutModal extends Component {
                                                 className="form-control" name="" id="">
                                             {this.props.transport_companies.map((transport, key) => {
                                                 return(
-                                                <option key={key} id="{transport.id}" value="PRESIDENT">{transport.transport_name}</option>
+                                                <option key={key} id="{transport.id}" value="PRESIDENT">
+                                            {transport.transport_name} FOR {transport.price/1000000000000000000} ETH</option>
                                                 );
                                             })}
                                            </select>

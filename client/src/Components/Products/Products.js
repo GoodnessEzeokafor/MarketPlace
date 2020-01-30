@@ -68,7 +68,7 @@ export default class Products extends Component {
                   <p>
                       {product.product_description}
                   </p>
-            <p className="mb-2"><b>{product.product_price/1000000000000000000}ETH</b></p>
+            <p className="mb-2"><b>{product.product_price/1000000000000000000} ETH</b></p>
             <p>
                 <input 
                   type="text" 
