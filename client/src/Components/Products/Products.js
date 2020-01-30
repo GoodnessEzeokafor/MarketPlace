@@ -72,7 +72,7 @@ export default class Products extends Component {
                   type="text" 
                   className="mb-2"   
                   placeholder="QUANTITY TO BUY" 
-                  ref = {(input) => {this.quantity = input}}                  />
+                  ref = {(input) => {this.quantity = input}}  value="1"                 />
                   <b>Quantity you want to buy</b>
             </p> 
             

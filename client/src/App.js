@@ -11,6 +11,7 @@ import Transports from "./Components/TransportCompany/Transports"
 import Web3 from 'web3';
 import MarketPlace from "./abis/MarketPlace.json"
 import NewLogo from "./NewLogo.png"
+import Background from "./background.jpeg"
 
 
 export default class App extends Component {
@@ -177,8 +178,12 @@ export default class App extends Component {
             </div>
           </div>		
         </header>
-      
+        {/* <div>
+            <img src="/images/background.jpeg"  style={{width:"100vh"}}/>
+          </div>
+           */}
         <section className="best-seel-area pt--80 pb--60">
+          
         <Switch>
             <Route path="/products">
               <Products 
