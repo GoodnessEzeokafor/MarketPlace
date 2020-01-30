@@ -41,7 +41,7 @@ export default class CheckoutModal extends Component {
                                 <div className="col-md-12 mb-3">
                                     <label htmlFor="validationServer01">Price To Pay: </label>
                                     <b>price X quantity</b> <br />
-        <b>{this.props.getProduct["3"]/1000000000000000000} X {this.props.quantity}</b> <br />
+        <b>{this.props.getProduct["3"]/1000000000000000000} X {this.props.quantity} per Basket</b> <br />
                                     <b>= {this.props.price} ETH</b>
                                 </div>
                                 
