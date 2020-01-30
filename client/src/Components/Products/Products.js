@@ -56,6 +56,8 @@ export default class Products extends Component {
                                 transport_companies={this.props.transport_companies}
                                 quantity={this.state.quantity}
                                 price={this.state.price}
+                                MarketPlaceDapp ={this.props.MarketPlaceDapp}
+                                account={this.props.account}
 
                             />
               <div className="thumbnail">
@@ -77,7 +79,8 @@ export default class Products extends Component {
             </p> 
             
 
-                  <p><button 
+                  <p>
+                    {/* <button 
                       className="btn btn-primary" 
                       // role="button"
                       id={product.id}
@@ -90,11 +93,10 @@ export default class Products extends Component {
                       console.log("Quantity", quantity)
                       this.props.MarketPlaceDapp.methods.buyProduct(id).send({from: this.props.account,value:event.target.value * quantity })
                         .once('receipt', (receipt)=> {
-                          // this.setState({ loading: false})
                         })
                       event.persist();
                     }}
-                  >Buy Product</button> 
+                  >Buy Product</button>  */}
                   <button
                   id = {product.id}
                   className="btn btn-danger"

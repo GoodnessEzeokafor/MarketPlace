@@ -92,7 +92,7 @@ export default class ProductForm extends Component {
     class="form-control" name="" id="" rows="3" placeholder="Product Description"></textarea>
 
     </div>
-    <button type="submit" className="btn btn-primary btn-block">Create Account</button>
+    <button type="submit" className="btn btn-primary btn-block">Add Product</button>
     </form>
     </div>
     </div>
