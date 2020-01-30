@@ -62,18 +62,19 @@ export default class CheckoutModal extends Component {
                                     </div>
                                 </div> 
                             </div>
-                            <button 
+                            {/* <button 
                             id = {this.props.getProduct["0"]}
                             className="btn btn-primary btn-block" type="button"
                             onClick = {async(event) => {
                                 const id = parseInt(event.target.id, 10);
                                 const quantity = parseInt(this.props.quantity,10)
-                                this.props.MarketPlaceDapp.methods.buyProduct(id).send({from: this.props.account,value:this.props.price })
+                                const price = parseInt((this.props.getProduct["3"]/1000000000000000000),10) * this.props.quantity
+                                this.props.MarketPlaceDapp.methods.buyProduct(id).send({from: this.props.account,value:price})
 
                                 event.persist();
                             }}
                             
-                            >Buy Product</button>
+                            >Buy Product</button> */}
                         </form>
                 </div>
                 <div className="modal-footer">             

@@ -74,13 +74,15 @@ export default class Products extends Component {
                   type="text" 
                   className="mb-2"   
                   placeholder="QUANTITY TO BUY" 
-                  ref = {(input) => {this.quantity = input}}  value="1"                 />
+                  ref = {(input) => {this.quantity = input}} 
+                  //  value="1"                
+                    />
                   <b>Quantity you want to buy</b>
             </p> 
             
 
                   <p>
-                    {/* <button 
+                    <button 
                       className="btn btn-primary" 
                       // role="button"
                       id={product.id}
@@ -96,7 +98,7 @@ export default class Products extends Component {
                         })
                       event.persist();
                     }}
-                  >Buy Product</button>  */}
+                  >Buy Product</button> 
                   <button
                   id = {product.id}
                   className="btn btn-danger"
