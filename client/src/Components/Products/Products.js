@@ -98,7 +98,7 @@ export default class Products extends Component {
                         })
                       event.persist();
                     }}
-                  >Buy Product</button> 
+                  >Buy (Shipping)</button> 
                   <button
                   id = {product.id}
                   className="btn btn-danger"

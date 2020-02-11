@@ -72,7 +72,7 @@ export default class ProductForm extends Component {
     <input 
         type="text" 
         className="form-control" 
-        placeholder="Product Price" 
+        placeholder="Price per package unit (e.g 0.001 ETH per basket)" 
         aria-describedby="basic-addon2"
         ref = {(input) => {this.product_price = input}}
         />
