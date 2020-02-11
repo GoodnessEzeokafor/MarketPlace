@@ -98,7 +98,7 @@ export default class Products extends Component {
                         })
                       event.persist();
                     }}
-                  >Buy (Shipping)</button> 
+                  >Buy (Pickup)</button> 
                   <button
                   id = {product.id}
                   className="btn btn-danger"
@@ -116,7 +116,7 @@ export default class Products extends Component {
                     this.setState({ getProduct });
                     event.persist();
                   }}
-                  >Cart</button>
+                  >Buy (Shipping)</button>
                   </p>
                 </div>
               </div>
