@@ -27,23 +27,23 @@
         - store transactionHash
 */
 pragma solidity ^0.5.0;
+
 contract MarketPlace{
 
 
+
     string public dapp_name;  //dapp_name 
-    string public dapp_builder = "@GoodnessEzeokafor";
+    string public dapp_builder = "Chynasah";
     uint public farmerCount =0; 
     uint public buyerCount =0;
     uint public transportCompanyCount =0;
-    uint public traceCount =0;
     uint public productCount = 0;
 
     mapping (uint=>Farmer) public farmers;
     mapping (uint=>Buyer) public buyers;
     mapping (uint=>TransportCompany) public transport_companies;
     mapping (uint=>Product) public products;
-    mapping (uint=>Trace) public tracing;
-
+    
 
     /* START STRUCT  */
     struct Farmer{
@@ -88,21 +88,6 @@ contract MarketPlace{
         address payable seller;
     }
 
-    struct Trace{
-        uint id;
-        uint price_id;
-        string  product_name;
-        uint product_price;
-        // uint transport_company_id;
-        bool left;
-        bool arrived;
-        bool pending; 
-        uint timestamp;
-        uint updated;
-    }
-
-
-
     /* END STRUCT  */
 
     /*START EVENT */
@@ -132,18 +117,6 @@ contract MarketPlace{
         string upload_image,
         address payable seller
     );
-    event TraceCreated(
-        uint id,
-        uint product_id,
-        string  product_name,
-        uint product_price,
-        // uint transport_company_id,
-        bool left,
-        bool arrived,
-        bool pending,
-        uint timestamp,
-        uint updated
-    ); 
     event TransportCompanyCreated(
         uint id,
         string transport_name,
@@ -154,9 +127,6 @@ contract MarketPlace{
         uint price  
     );
     event BoughtProduct(address _from,address _to,uint amt);
-    event Left(uint id, bool left, uint updated);
-    event Arrived(uint id, bool arrived, uint updated);
-    
     /* END EVENT */
 
     /* START METHOD */
@@ -243,45 +213,7 @@ contract MarketPlace{
         );
     }
 
-    function createTrace(
-        uint _product_id,
-        string memory transport_name
-    )public{
-        traceCount++;
-        Product memory product = products[_product_id];
-        tracing[traceCount] = Trace(
-            traceCount,
-            product.id,
-            product.product_name,
-            product.product_price,
-            false,
-            false,
-            true,
-            now,
-            0
-        );
-    }
 
-    function leftTrace(
-        uint _id,
-        bool status
-    )public{
-        Trace memory trace = tracing[_id];
-        trace.left = status;
-        trace.updated = now;
-        tracing[_id] = trace;
-        emit Left(trace.id,trace.left,trace.updated);
-    }
-    function arriveTrace(
-        uint _id,
-        bool status
-    )public{
-        Trace memory trace = tracing[_id];
-        trace.arrived = status;
-        trace.updated = now;
-        tracing[_id] = trace;
-        emit Arrived(trace.id,trace.arrived,trace.updated);
-    }
 
 
 
